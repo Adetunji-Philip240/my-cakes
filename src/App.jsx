@@ -3,6 +3,9 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 import Menu from "./Menu";
 import CustomOrders from "./CustomOrders";
+import Process from "./Process";
+import Reviews from "./Reviews";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Hero />
         <Menu />
         <CustomOrders />
+        <Process />
+        <Reviews />
+        <Footer />
 
         {/* You can add more sections (like Bestsellers) down here later */}
       </main>
