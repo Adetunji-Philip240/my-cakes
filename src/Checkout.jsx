@@ -5,10 +5,13 @@ import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
-  const { cartItems, cartTotal } = useCart();
+  // Destructure deliveryFee from your cart context
+  const { cartItems, cartTotal, deliveryFee } = useCart();
   const navigate = useNavigate();
 
-  // If someone tries to go to /checkout with an empty cart, send them back to the shop
+  // Calculate the final total including the delivery fee
+  const finalTotal = cartTotal + deliveryFee;
+
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-[#fcfaf8] flex flex-col items-center justify-center">
@@ -27,9 +30,7 @@ export default function Checkout() {
 
   const handlePaymentSubmit = (e) => {
     e.preventDefault();
-    // Here is where you would normally integrate Paystack, Flutterwave, or Stripe
     alert("Payment successful! Thank you for your order.");
-    // In a real app, you would also clear the cart here.
     navigate("/");
   };
 
@@ -184,7 +185,8 @@ export default function Checkout() {
                   type="submit"
                   className="w-full mt-8 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg py-4 rounded-xl transition-all shadow-[0_4px_14px_0_rgba(225,29,72,0.39)]"
                 >
-                  Pay ₦{cartTotal.toLocaleString()}
+                  {/* Updated the button to display the finalTotal */}
+                  Pay ₦{finalTotal.toLocaleString()}
                 </button>
               </form>
             </div>
@@ -217,11 +219,13 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-between text-sm text-gray-600">
                   <span>Delivery</span>
-                  <span>Free</span>
+                  {/* Updated Delivery display */}
+                  <span>₦{deliveryFee.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold text-[#26150F] pt-3 border-t border-[#dfcabc]">
                   <span>Total</span>
-                  <span>₦{cartTotal.toLocaleString()}</span>
+                  {/* Updated Total display */}
+                  <span>₦{finalTotal.toLocaleString()}</span>
                 </div>
               </div>
             </div>

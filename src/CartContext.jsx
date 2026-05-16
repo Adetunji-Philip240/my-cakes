@@ -5,16 +5,16 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  // 1. Check local storage FIRST when the app loads
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("myCakesCart");
-    // If there is a saved cart, parse it from text back into an array. Otherwise, start empty.
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // 2. Automatically save to local storage ANY TIME the cartItems array changes
+  // Define the flat delivery fee here
+  const deliveryFee = 3000;
+
   useEffect(() => {
     localStorage.setItem("myCakesCart", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -53,6 +53,7 @@ export const CartProvider = ({ children }) => {
         isCartOpen,
         setIsCartOpen,
         cartTotal,
+        deliveryFee, // Pass it down so other components can use it
       }}
     >
       {children}
