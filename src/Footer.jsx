@@ -182,7 +182,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[#A89893] text-sm">
-            © 2025 My Cakes. All rights reserved.
+            © 2026 My Cakes. All rights reserved.
           </p>
           <p className="text-[#A89893] text-sm">
             Made with <span className="text-white">♡</span> in Lagos

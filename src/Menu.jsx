@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useCart } from "./CartContext";
 
 import cakeImage1 from "./assets/cake1.jpg";
 import cakeImage2 from "./assets/cake2.jpg";
@@ -8,10 +9,10 @@ import cakeImage5 from "./assets/cake5.jpg";
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const { addToCart } = useCart();
 
   const categories = ["All", "Celebration", "Chocolate", "Wedding", "Dietary"];
 
-  // Updated with actual image URLs instead of emojis
   const cakes = [
     {
       id: 1,
@@ -21,7 +22,7 @@ export default function Menu() {
       description:
         "Vanilla sponge layered with buttercream frosting and festive sprinkles.",
       price: "12,500",
-      image: cakeImage1, // Birthday slice
+      image: cakeImage1,
       isHot: true,
       rating: 5,
     },
@@ -33,7 +34,7 @@ export default function Menu() {
       description:
         "Rich cocoa cake with cream cheese frosting and a deep crimson crumb.",
       price: "14,000",
-      image: cakeImage2, // Red velvet
+      image: cakeImage2,
       isHot: true,
       rating: 5,
     },
@@ -45,7 +46,7 @@ export default function Menu() {
       description:
         "Three layers of dark, milk, and white chocolate ganache perfection.",
       price: "16,500",
-      image: cakeImage3, // Dark chocolate
+      image: cakeImage3,
       isHot: false,
       rating: 5,
     },
@@ -57,7 +58,7 @@ export default function Menu() {
       description:
         "Two-tier classic vanilla bean cake decorated with fresh edible flowers.",
       price: "45,000",
-      image: cakeImage4, // Wedding cake
+      image: cakeImage4,
       isHot: false,
       rating: 4,
     },
@@ -69,7 +70,7 @@ export default function Menu() {
       description:
         "Almond flour sponge topped with fresh seasonal berries and light cream.",
       price: "15,000",
-      image: cakeImage5, // Berry cake
+      image: cakeImage5,
       isHot: false,
       rating: 5,
     },
@@ -95,6 +96,7 @@ export default function Menu() {
           </p>
         </div>
 
+        {/* Category Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map((category) => (
             <button
@@ -111,13 +113,14 @@ export default function Menu() {
           ))}
         </div>
 
+        {/* Cake Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredCakes.map((cake) => (
             <div
               key={cake.id}
               className="bg-white rounded-3xl overflow-hidden shadow-[0_4px_20px_-10px_rgba(0,0,0,0.1)] border border-gray-50 transition-transform group"
             >
-              {/* Updated Image Section */}
+              {/* Image Section */}
               <div className="h-56 relative w-full overflow-hidden bg-gray-100">
                 {cake.isHot && (
                   <span className="absolute top-4 left-4 bg-rose-600 z-10 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full shadow-sm">
@@ -131,6 +134,7 @@ export default function Menu() {
                 />
               </div>
 
+              {/* Text & Button Section */}
               <div className="p-6">
                 <p className="text-xs font-semibold text-gray-400 tracking-wider mb-2">
                   {cake.tag}
@@ -159,7 +163,15 @@ export default function Menu() {
                     </span>
                     <span className="text-sm text-gray-400">/ cake</span>
                   </div>
-                  <button className="w-10 h-10 bg-[#2d1b14] text-white rounded-full flex items-center justify-center text-xl hover:bg-[#c46953] transition-colors focus:outline-none">
+
+                  {/* CHANGED HERE: Removed the broken category code and added the addToCart function */}
+                  <button
+                    onClick={() => {
+                      addToCart(cake);
+                      alert(`Added ${cake.name} to cart!`);
+                    }}
+                    className="w-10 h-10 bg-[#2d1b14] text-white rounded-full flex items-center justify-center text-xl hover:bg-[#c46953] transition-colors focus:outline-none"
+                  >
                     +
                   </button>
                 </div>
