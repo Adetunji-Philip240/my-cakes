@@ -15,6 +15,7 @@ import BestSellers from "./BestSellers";
 import CustomOrdersPage from "./CustomOrdersPage";
 import AboutUs from "./AboutUs";
 import Checkout from "./Checkout";
+import CategoryPage from "./CategoryPage";
 
 function Home() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/custom-orders" element={<CustomOrdersPage />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
         </Routes>
       </Router>
     </CartProvider>
